@@ -12,7 +12,11 @@ export default function Generator() {
         setError('');
 
         try {
-            const response = await fetch('http://localhost:5000/api/generate', {
+            const endpoint = import.meta.env.DEV
+                ? 'http://localhost:5000/api/generate'
+                : '/api/generate';
+
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
